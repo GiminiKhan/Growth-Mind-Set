@@ -3,7 +3,7 @@ import pandas as pd
 import os
 from io import BytesIO
 
-st.set_page_config(page_title= "Data Sweeper", layout='wide')
+st.set_page_config(page_title= "Data Sweeper", layout='wide' )
 
 #custom css
 st.markdown(
@@ -23,20 +23,20 @@ st.title("Datasweeper Sterling by Qurat")
 st.write("Transfer your files between CSV and Excel formats with built-in data cleaning and visualization Creating the project for quarter 3!")
 
 #file uploder
-
-upload_files = st.file_uploader("Upload your files(accepts CSV or Excel):", type=["cvs","xlsx"], accept_multiple_files=(True))
+uploaded_files = st.file_uploader("Upload your files (accepts CSV or Excel):", type=["csv","xlsx"], accept_multiple_files=(True))
 
 if uploaded_files:
-    for file in upload_files:
+    for file in uploaded_files:
         file_ext = os.path.splitext(file.name)[-1].lower()
 
-        if file_ext == ".CSV":
-            df = pd.read_CSV(file)
+        if file_ext == ".csv":
+            df = pd.read_csv(file)
         elif file_ext == "xlsx":
             df = pd.read_excel(file)
         else:
-           st.error(f"unsupported file type: {file_ext}")
-           continue
+            st.error(f"unsupported file type: {file_ext}")
+            continue
+
  #file details
         st.write(" Preview the head of the Dataframe")
         st.dataframe(df.head())
@@ -92,6 +92,8 @@ if uploaded_files:
                   )
                   
 st.success(" All files processed successfully!")
+
+
 
 
 
